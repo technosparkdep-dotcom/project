@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events — TechnoSpark</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── EVENT REGISTRATION MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10,14,26,0.85);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: var(--card);
+      border: 1px solid rgba(0,212,255,0.2);
+      border-radius: var(--radius, 16px);
+      padding: 36px 32px;
+      width: 100%;
+      max-width: 460px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px; right: 18px;
+      background: none;
+      border: none;
+      color: var(--slate);
+      font-size: 1.3rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .modal-close:hover { color: var(--magenta); }
+    .modal-box h3 {
+      font-family: var(--font-display);
+      color: var(--white);
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+    .modal-box .modal-event-name {
+      color: var(--cyan);
+      font-size: 0.85rem;
+      margin-bottom: 24px;
+    }
+    .error-msg {
+      display: none;
+      color: #FF006E;
+      font-size: 0.78rem;
+      margin-top: 6px;
+      padding: 6px 12px;
+      background: rgba(255,0,110,0.08);
+      border-left: 2px solid #FF006E;
+      border-radius: 0 6px 6px 0;
+    }
+    .form-group input.invalid { border-color: #FF006E !important; box-shadow: 0 0 0 3px rgba(255,0,110,0.12) !important; }
+  </style>
+</head>
+<body data-page="events" data-depth="1">
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><span class="logo-spark">⚡</span>TechnoSpark</a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="events.html" class="active">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li>
+          <a href="admin.html" class="nav-admin-btn" title="Admin Login" aria-label="Admin Login">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <p class="section-eyebrow">What's Happening</p>
+    <h1>Events  <span class="accent-cyan"></span></h1>
+    <p> there's always something happening at TechnoSpark.</p>
+  </div>
+
+  <!-- UPCOMING -->
+  <section class="section">
+    <div class="container">
+      <p class="section-eyebrow fade-in" id="events-eyebrow">Don't Miss Out</p>
+      <h2 class="section-title fade-in" id="events-title">Upcoming Events</h2>
+      <div class="events-list" id="events-list">
+
+        <div class="event-card fade-in">
+          <div class="event-date-box">
+            <div class="day">14</div>
+            <div class="month">july</div>
+          </div>
+          <div class="event-info">
+            <h3>FRESHERS DAY 2026</h3>
+            <p class="event-meta"></p>
+            <p></p>
+          </div>
+          <div>
+            <span class="event-tag tag-open" style="display:block;margin-bottom:12px;">Registration Open</span>
+            <button type="button" class="btn btn-magenta" style="font-size:0.7rem;padding:10px 20px;" onclick="openRegisterModal('FRESHERS DAY 2026')">Register</button>
+          </div>
+        </div>
+
+        <div class="event-card fade-in">
+          <div class="event-date-box" style="background:linear-gradient(135deg,#FF006E,#8800FF);">
+            <div class="day"></div>
+            <div class="month"></div>
+          </div>
+          <div class="event-info">
+            <h3></h3>
+            <p class="event-meta"></p>
+            <p></p>
+          </div>
+          <div>
+            <span class="event-tag tag-upcoming" style="display:block;margin-bottom:12px;"></span>
+            <a href="contact.html" class="btn btn-outline" style="font-size:0.7rem;padding:10px 20px;"></a>
+          </div>
+        </div>
+
+        <div class="event-card fade-in">
+          <div class="event-date-box" style="background:linear-gradient(135deg,#00D4FF,#00AA99);">
+            <div class="day"></div>
+            <div class="month"></div>
+          </div>
+          <div class="event-info">
+            <h3></h3>
+            <p class="event-meta"></p>
+            <p></p>
+          </div>
+          <div>
+            <span class="event-tag tag-upcoming" style="display:block;margin-bottom:12px;"></span>
+            <a href="contact.html" class="btn btn-outline" style="font-size:0.7rem;padding:10px 20px;"> </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PAST EVENTS (shown only when the admin marks an event as "Past") -->
+  <section class="section" id="past-events-section" style="display:none;background:var(--card);">
+    <div class="container">
+      <p class="section-eyebrow" id="past-events-eyebrow">Look Back</p>
+      <h2 class="section-title" id="past-events-title">Past Events</h2>
+      <div class="events-list" id="past-events-list"></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="nav-logo"><span class="logo-spark">⚡</span>TechnoSpark</span>
+        <p>Department Tech Club · </p>
+      </div>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="events.html">Events</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="team.html">Team</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-socials">
+        <a href="#">📸</a><a href="#">💼</a><a href="#">💻</a><a href="#"></a>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 TechnoSpark. All rights reserved.</p></div>
+  </footer>
+
+  <!-- EVENT REGISTRATION MODAL -->
+  <div class="modal-overlay" id="register-modal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeRegisterModal()">✕</button>
+      <h3>Register for Event</h3>
+      <p class="modal-event-name" id="modal-event-name"></p>
+
+      <form id="register-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="reg-fname">First Name</label>
+            <input type="text" id="reg-fname" placeholder="First name" />
+          </div>
+          <div class="form-group">
+            <label for="reg-lname">Last Name</label>
+            <input type="text" id="reg-lname" placeholder="Last name" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-email">College Email</label>
+          <input type="email" id="reg-email" placeholder="registerno@mannarcollege.ac.in" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="reg-phone">Phone</label>
+            <input type="tel" id="reg-phone" placeholder="10-digit number" />
+          </div>
+          <div class="form-group">
+            <label for="reg-dept">Department</label>
+            <input type="text" id="reg-dept" placeholder="e.g. BCA" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-year">Year</label>
+          <select id="reg-year">
+            <option value="">Select year</option>
+            <option>1st Year</option>
+            <option>2nd Year</option>
+            <option>3rd Year</option>
+            <option>Final Year</option>
+          </select>
+        </div>
+
+        <div class="error-msg" id="reg-error"></div>
+
+        <button type="button" id="reg-submit-btn" class="btn btn-primary" style="width:100%;margin-top:8px;" onclick="submitRegistration()">
+          Confirm Registration ⚡
+        </button>
+      </form>
+
+      <!-- SUCCESS SCREEN -->
+      <div id="register-success" style="display:none;text-align:center;padding:30px 10px;">
+        <div style="font-size:3rem;margin-bottom:16px;">⚡</div>
+        <h3 style="font-family:var(--font-display);color:var(--cyan);font-size:1.1rem;margin-bottom:10px;">You're Registered!</h3>
+        <p style="color:var(--slate);font-size:0.9rem;line-height:1.7;">We've saved your spot. Check your email for further updates.</p>
+        <button type="button" class="btn btn-outline" style="margin-top:24px;" onclick="closeRegisterModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/content.js"></script>
+  <script>
+    var currentEventName = '';
+
+    function openRegisterModal(eventName) {
+      currentEventName = eventName;
+      document.getElementById('modal-event-name').textContent = 'You are registering for: ' + eventName;
+      document.getElementById('register-form').style.display = 'block';
+      document.getElementById('register-success').style.display = 'none';
+      document.getElementById('reg-error').style.display = 'none';
+      ['reg-fname','reg-lname','reg-email','reg-phone','reg-dept','reg-year'].forEach(function (id) {
+        var el = document.getElementById(id);
+        el.value = '';
+        el.classList.remove('invalid');
+      });
+      document.getElementById('register-modal').classList.add('open');
+    }
+
+    function closeRegisterModal() {
+      document.getElementById('register-modal').classList.remove('open');
+    }
+
+    // Close modal on overlay click (but not when clicking inside the box)
+    document.getElementById('register-modal').addEventListener('click', function (e) {
+      if (e.target === this) closeRegisterModal();
+    });
+
+    function submitRegistration() {
+      var fname = document.getElementById('reg-fname').value.trim();
+      var lname = document.getElementById('reg-lname').value.trim();
+      var email = document.getElementById('reg-email').value.trim();
+      var phone = document.getElementById('reg-phone').value.trim();
+      var dept  = document.getElementById('reg-dept').value.trim();
+      var year  = document.getElementById('reg-year').value;
+
+      var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      var errorBox = document.getElementById('reg-error');
+      errorBox.style.display = 'none';
+
+      if (!fname || !lname || !email || !emailPattern.test(email)) {
+        errorBox.textContent = '❌ Please fill in your name and a valid email address.';
+        errorBox.style.display = 'block';
+        return;
+      }
+
+      var btn = document.getElementById('reg-submit-btn');
+      btn.disabled = true;
+      btn.textContent = 'Registering…';
+
+      fetch(API_BASE_URL + '/registrations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          eventName: currentEventName,
+          firstName: fname,
+          lastName:  lname,
+          email:     email,
+          phone:     phone,
+          department:dept,
+          year:      year
+        })
+      })
+        .then(function (res) {
+          if (!res.ok) { return res.json().then(function (d) { throw new Error(d.error || 'Something went wrong'); }); }
+          return res.json();
+        })
+        .then(function () {
+          document.getElementById('register-form').style.display = 'none';
+          document.getElementById('register-success').style.display = 'block';
+        })
+        .catch(function (err) {
+          errorBox.textContent = '❌ Could not register: ' + err.message + '. Please try again.';
+          errorBox.style.display = 'block';
+        })
+        .finally(function () {
+          btn.disabled = false;
+          btn.textContent = 'Confirm Registration ⚡';
+        });
+    }
+  </script>
+</body>
+</html>

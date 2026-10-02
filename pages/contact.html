@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — TechnoSpark</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .error-msg {
+      display: none;
+      color: #FF006E;
+      font-size: 0.78rem;
+      margin-top: 6px;
+      padding: 6px 12px;
+      background: rgba(255,0,110,0.08);
+      border-left: 2px solid #FF006E;
+      border-radius: 0 6px 6px 0;
+    }
+    .form-group input.invalid,
+    .form-group select.invalid,
+    .form-group textarea.invalid {
+      border-color: #FF006E !important;
+      box-shadow: 0 0 0 3px rgba(255,0,110,0.12) !important;
+    }
+    .form-group input.valid,
+    .form-group select.valid,
+    .form-group textarea.valid {
+      border-color: #00ff88 !important;
+      box-shadow: 0 0 0 3px rgba(0,255,136,0.08) !important;
+    }
+  </style>
+</head>
+<body data-page="contact" data-depth="1">
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><span class="logo-spark">⚡</span>TechnoSpark</a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+        <li>
+          <a href="admin.html" class="nav-admin-btn" title="Admin Login" aria-label="Admin Login">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <p class="section-eyebrow">Get Involved</p>
+    <h1>Contact <span class="accent-cyan">Us</span></h1>
+    <p>Want to join, collaborate, sponsor, or just say hi? We'd love to hear from you.</p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- LEFT: INFO -->
+        <div>
+          <div class="fade-in" id="contact-connect">
+            <h2 style="font-family:var(--font-display);font-size:1.4rem;color:var(--white);margin-bottom:16px;">Let's Connect</h2>
+            <p style="font-size:0.95rem;line-height:1.8;margin-bottom:36px;">Whether you're a student looking to join, a company wanting to sponsor, or a faculty member interested in collaboration — reach out. We respond within 48 hours.</p>
+          </div>
+
+          <div id="contact-details">
+          <div class="contact-detail fade-in">
+            <div class="contact-icon">📧</div>
+            <div>
+              <h4>Email</h4>
+              <p>technospark@college.edu</p>
+            </div>
+          </div>
+
+          <div class="contact-detail fade-in">
+            <div class="contact-icon">📍</div>
+            <div>
+              <h4>Location</h4>
+              <p>BCA department</p>
+            </div>
+          </div>
+
+          <div class="contact-detail fade-in">
+            <div class="contact-icon">🕐</div>
+            <div>
+              <h4>Club Hours</h4>
+              <p>Monday – Friday: 8:30 AM – 1:30 PM</p>
+            </div>
+          </div>
+
+          <div class="contact-detail fade-in">
+            <div class="contact-icon">📱</div>
+            <div>
+              <h4>Social Media</h4>
+              <p>
+                <a href="#" style="color:var(--cyan);margin-right:12px;"></a>
+                <a href="#" style="color:var(--cyan);margin-right:12px;">Netlify</a>
+                <a href="#" style="color:var(--cyan);">GitHub</a>
+              </p>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: FORM -->
+        <div class="contact-form fade-in">
+
+          <form id="contact-form" novalidate>
+
+            <!-- First Name + Last Name -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" placeholder="First name" />
+                <div class="error-msg" id="err-fname">❌ First name is required</div>
+              </div>
+              <div class="form-group">
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" placeholder="Last name" />
+                <div class="error-msg" id="err-lname">❌ Last name is required</div>
+              </div>
+            </div>
+
+            <!-- College Email -->
+            <div class="form-group">
+              <label for="email">College Email</label>
+              <input type="email" id="email" placeholder="registerno@mannarcollege.ac.in" />
+              <div class="error-msg" id="err-email">❌ Please enter a valid email address</div>
+            </div>
+
+            <!-- Reason -->
+            <div class="form-group">
+              <label for="reason">I'm reaching out to…</label>
+              <select id="reason">
+                <option value="">Select a reason</option>
+                <option>Join TechnoSpark as a member</option>
+                <option>join in event</option>
+                <option>Propose a collaboration </option>
+                <option>Sponsor or partner with us</option>
+                <option>General enquiry</option>
+              </select>
+              <div class="error-msg" id="err-reason">❌ Please select a reason</div>
+            </div>
+
+            <!-- Message -->
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" rows="5" placeholder="Tell us a bit about yourself or what you have in mind…"></textarea>
+              <div class="error-msg" id="err-msg">❌ Please write a message (minimum 10 characters)</div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="button"
+                    id="contact-submit-btn"
+                    onclick="validateAndSubmit()"
+                    class="btn btn-primary"
+                    style="width:100%;">
+              Send Message ⚡
+            </button>
+
+          </form>
+
+          <!-- SUCCESS SCREEN -->
+          <div id="form-success" style="display:none;text-align:center;padding:60px 20px;">
+            <div style="font-size:3.5rem;margin-bottom:20px;">⚡</div>
+            <h3 style="font-family:var(--font-display);color:var(--cyan);font-size:1.2rem;margin-bottom:12px;">Message Sent Successfully!</h3>
+            <p style="color:var(--slate);font-size:0.95rem;line-height:1.7;">Thanks for reaching out.<br /></p>
+            <a href="../index.html" class="btn btn-outline" style="margin-top:28px;display:inline-block;">← Back to Home</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="contact-faq-section" style="background:var(--card);">
+    <div class="container" id="contact-faq" style="max-width:720px;">
+      <p class="section-eyebrow fade-in">Quick Answers</p>
+      <h2 class="section-title fade-in">FAQ</h2>
+
+      <div class="fade-in" style="margin-bottom:20px;background:var(--navy);border-radius:var(--radius);padding:24px;border:1px solid rgba(0,212,255,0.1);">
+        <h4 style="font-family:var(--font-display);color:var(--white);font-size:0.9rem;margin-bottom:8px;">Who can join TechnoSpark?</h4>
+        <p style="font-size:0.88rem;">Any student enrolled in our college, from any department or year. We welcome complete beginners!</p>
+      </div>
+
+      
+
+      <div class="fade-in" style="margin-bottom:20px;background:var(--navy);border-radius:var(--radius);padding:24px;border:1px solid rgba(0,212,255,0.1);">
+        <h4 style="font-family:var(--font-display);color:var(--white);font-size:0.9rem;margin-bottom:8px;">Do I need prior coding experience?</h4>
+        <p style="font-size:0.88rem;">Not at all. We run beginner-friendly workshops every month. Everyone starts somewhere.</p>
+      </div>
+
+      
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="nav-logo"><span class="logo-spark">⚡</span>TechnoSpark</span>
+        <p>Department Tech Club · </p>
+      </div>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="events.html">Events</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="team.html">Team</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-socials">
+        <a href="#">📸</a><a href="#">💼</a><a href="#">💻</a><a href="#"></a>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 TechnoSpark. All rights reserved.</p></div>
+  </footer>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/content.js"></script>
+
+  <script>
+    function validateAndSubmit() {
+
+      /* 1. Clear all errors */
+      var fields = ['fname','lname','email','reason','message'];
+      for (var i = 0; i < fields.length; i++) {
+        var el = document.getElementById(fields[i]);
+        if (el) { el.classList.remove('invalid'); el.classList.remove('valid'); }
+      }
+      var errors = ['err-fname','err-lname','err-email','err-reason','err-msg'];
+      for (var j = 0; j < errors.length; j++) {
+        var er = document.getElementById(errors[j]);
+        if (er) er.style.display = 'none';
+      }
+
+      /* 2. Read values */
+      var fname  = document.getElementById('fname').value.trim();
+      var lname  = document.getElementById('lname').value.trim();
+      var email  = document.getElementById('email').value.trim();
+      var reason = document.getElementById('reason').value;
+      var msg    = document.getElementById('message').value.trim();
+
+      /* 3. Validate each field */
+      var valid = true;
+
+      if (fname === '') {
+        document.getElementById('fname').classList.add('invalid');
+        document.getElementById('err-fname').style.display = 'block';
+        valid = false;
+      } else {
+        document.getElementById('fname').classList.add('valid');
+      }
+
+      if (lname === '') {
+        document.getElementById('lname').classList.add('invalid');
+        document.getElementById('err-lname').style.display = 'block';
+        valid = false;
+      } else {
+        document.getElementById('lname').classList.add('valid');
+      }
+
+      var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (email === '' || !emailPattern.test(email)) {
+        document.getElementById('email').classList.add('invalid');
+        document.getElementById('err-email').style.display = 'block';
+        valid = false;
+      } else {
+        document.getElementById('email').classList.add('valid');
+      }
+
+      if (reason === '') {
+        document.getElementById('reason').classList.add('invalid');
+        document.getElementById('err-reason').style.display = 'block';
+        valid = false;
+      } else {
+        document.getElementById('reason').classList.add('valid');
+      }
+
+      if (msg === '' || msg.length < 10) {
+        document.getElementById('message').classList.add('invalid');
+        document.getElementById('err-msg').style.display = 'block';
+        valid = false;
+      } else {
+        document.getElementById('message').classList.add('valid');
+      }
+
+      /* 4. Send to backend and show success */
+      if (valid) {
+        var submitBtn = document.getElementById('contact-submit-btn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+
+        fetch(API_BASE_URL + '/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            firstName: fname,
+            lastName:  lname,
+            email:     email,
+            reason:    reason,
+            message:   msg
+          })
+        })
+          .then(function (res) {
+            if (!res.ok) { return res.json().then(function (d) { throw new Error(d.error || 'Something went wrong'); }); }
+            return res.json();
+          })
+          .then(function () {
+            document.getElementById('contact-form').style.display = 'none';
+            document.getElementById('form-success').style.display = 'block';
+          })
+          .catch(function (err) {
+            alert('Could not send your message: ' + err.message + '. Please check your connection and try again.');
+          })
+          .finally(function () {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Message ⚡';
+          });
+      }
+    }
+  </script>
+
+</body>
+</html>

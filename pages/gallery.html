@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery — TechnoSpark</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body data-page="gallery" data-depth="1">
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo"><span class="logo-spark">⚡</span>TechnoSpark</a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html" class="active">Gallery</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li>
+          <a href="admin.html" class="nav-admin-btn" title="Admin Login" aria-label="Admin Login">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <p class="section-eyebrow">Moments We've Captured</p>
+    <h1>Our <span class="accent-cyan">Gallery</span></h1>
+    <p>A look back at the workshops, hackathons, and meetups that make TechnoSpark what it is.</p>
+  </div>
+
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- Images rendered by JS -->
+      </div>
+
+      <div class="empty-state" id="gallery-empty" style="display:none;">
+        <div class="icon">🖼</div>
+        <h3>No photos yet</h3>
+        <p style="font-size:0.85rem;">Check back soon — new event photos are added regularly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════
+     LIGHTBOX
+  ══════════════════════ -->
+  <div class="lightbox-overlay" id="lightbox-overlay">
+    <div class="lightbox-box">
+      <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+      <img id="lightbox-img" src="" alt="" />
+      <p class="lightbox-caption" id="lightbox-caption"></p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="nav-logo"><span class="logo-spark">⚡</span>TechnoSpark</span>
+        <p>Department Tech Club ·</p>
+      </div>
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="events.html">Events</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="team.html">Team</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-socials">
+        <a href="#">📸</a><a href="#">💼</a><a href="#">💻</a><a href="#"></a>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 TechnoSpark. All rights reserved.</p></div>
+  </footer>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/content.js"></script>
+  <script>
+    const API_ROOT = API_BASE_URL.replace(/\/api\/?$/, '');
+
+    function loadGallery() {
+      const grid = document.getElementById('gallery-grid');
+      const empty = document.getElementById('gallery-empty');
+
+      fetch(API_BASE_URL + '/gallery')
+        .then(res => res.json())
+        .then(images => {
+          if (!images.length) {
+            grid.innerHTML = '';
+            empty.style.display = 'block';
+            return;
+          }
+          empty.style.display = 'none';
+
+          grid.innerHTML = images.map(img => `
+            <div class="gallery-item fade-in visible" data-full="${API_ROOT}${img.url}" data-caption="${escapeHtml(img.caption)}">
+              <img src="${API_ROOT}${img.url}" alt="${escapeHtml(img.caption) || 'Gallery photo'}" loading="lazy" />
+              ${img.caption ? `<div class="gallery-caption">${escapeHtml(img.caption)}</div>` : ''}
+            </div>
+          `).join('');
+
+          grid.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', () => {
+              openLightbox(item.dataset.full, item.dataset.caption);
+            });
+          });
+        })
+        .catch(err => console.error(err));
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[c]));
+    }
+
+    /* ── LIGHTBOX ── */
+    function openLightbox(src, caption) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-caption').textContent = caption || '';
+      const overlay = document.getElementById('lightbox-overlay');
+      overlay.style.display = 'flex';
+      // Force a reflow so the browser registers the "before" state,
+      // then add .open on the next frame so opacity/scale actually transition.
+      overlay.offsetHeight;
+      requestAnimationFrame(() => overlay.classList.add('open'));
+    }
+    function closeLightbox() {
+      const overlay = document.getElementById('lightbox-overlay');
+      overlay.classList.remove('open');
+      setTimeout(() => {
+        overlay.style.display = 'none';
+        document.getElementById('lightbox-img').src = '';
+      }, 250); // matches the CSS transition duration
+    }
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    document.getElementById('lightbox-overlay').addEventListener('click', e => {
+      if (e.target.id === 'lightbox-overlay') closeLightbox();
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    loadGallery();
+  </script>
+
+</body>
+</html>
